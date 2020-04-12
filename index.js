@@ -34,7 +34,7 @@ app.post('/makeuser', (req, res) => {
             res.send(err.code);
         } else {
             console.log('Made user: ' + req.body.userID);
-            res.send(err.code);
+            res.send('Good');
         }
     });
 
