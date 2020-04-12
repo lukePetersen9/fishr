@@ -27,6 +27,11 @@ app.listen(3000, () => {
 
 app.post('/makeuser', (req, res) => {
     console.log('got something...');
+    connection.query('select * from books', function (err, rows, fields) {
+        if (err) throw err;
+
+        console.log('The solution is: ', rows[0].solution);
+    });
     console.log(req.body);
     res.send({
         'hello': 'yolo'
