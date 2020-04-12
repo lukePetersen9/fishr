@@ -3,7 +3,7 @@ const app = express();
 
 app.post('/makeuser', (req, res) => {
     console.log('got something...');
-    console.log(req.body);
+    console.log(req.body.name);
     res.send({
         'hello': 'yolo'
     });
