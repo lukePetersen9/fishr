@@ -3,13 +3,16 @@ const bodyParser = require('body-parser');
 const app = express();
 const mysql = require('mysql');
 var connection = mysql.createConnection({
-    host: 'localhost',
+    host: 'fishr-database.cgdpyeanjdf4.us-east-2.rds.amazonaws.com',
     user: 'admin',
     password: 'zmZMGOOIqHV7t4cP0VBV',
     database: 'fishr-database',
 });
 
-connection.connect();
+connection.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected!");
+});
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
