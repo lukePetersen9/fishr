@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.get('/makeuser', (req, res) => {
+app.post('/makeuser', (req, res) => {
     console.log('got something...');
     console.log(req.headers);
     res.send({
