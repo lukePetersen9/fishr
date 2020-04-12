@@ -29,8 +29,8 @@ app.listen(3000, () => {
 app.post('/makeuser', (req, res) => {
 
     console.log('got something...');
-    connection.query('INSERT INTO users(first_name, last_name, username, email, userkey, phone_number, profile_picture) VALUES ("f", "l", "u", "e", "k", "p", "pic")', function (err, rows, fields) {
-        //connection.query('INSERT INTO users (first_name, last_name, username, email, userkey,phone_number,profile_picture) VALUES ('+req.body.first+','+req.body.last+','+req.body.username+','+req.body.email+','+req.body.userID+','+req.body.phone+','+req.body.profilePicure+')', function (err, rows, fields) {
+
+    connection.query('INSERT INTO users (first_name, last_name, username, email, userkey,phone_number,profile_picture) VALUES ("' + req.body.first + '","' + req.body.last + '","' + req.body.username + '","' + req.body.email + '","' + req.body.userID + '","' + req.body.phone + '","' + req.body.profilePicure + '")', function (err, rows, fields) {
         if (err) throw err;
 
         console.log('${req.body.userID}');
