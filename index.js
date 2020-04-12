@@ -1,6 +1,15 @@
 const express = require('express');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const app = express();
+const mysql = require('mysql');
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'admin',
+    password: 'zmZMGOOIqHV7t4cP0VBV',
+    database: 'fishr-database',
+});
+
+connection.connect();
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -21,11 +30,3 @@ app.post('/makeuser', (req, res) => {
         'hello': 'yolo'
     });
 });
-
-
-
-
-/*
-cognito: 4n3s8jd85je5prosfh7lsk39a8
-https://fishrauth.auth.us-east-2.amazoncognito.com
- */
