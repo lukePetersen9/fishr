@@ -4,6 +4,9 @@ const app = express();
 app.get('/makeuser', (req, res) => {
     console.log('got something...');
     console.log(req.headers);
+    res.send({
+        'hello': 'yolo'
+    });
 });
 
 app.listen(3000, () => {
