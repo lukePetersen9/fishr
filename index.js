@@ -3,10 +3,15 @@ const app = express();
 
 app.post('/makeuser', (req, res) => {
     console.log('got something...');
-    console.log(req.body.name);
+    console.log(req.body);
     res.send({
         'hello': 'yolo'
     });
+});
+
+app.configure(function () {
+    app.use(express.bodyParser());
+    app.use(app.router);
 });
 
 app.listen(3000, () => {
