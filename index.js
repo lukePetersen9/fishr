@@ -6,6 +6,7 @@ var connection = mysql.createConnection({
     host: 'fishr-database.cgdpyeanjdf4.us-east-2.rds.amazonaws.com',
     user: 'admin',
     password: 'zmZMGOOIqHV7t4cP0VBV',
+    database: 'test',
 });
 
 connection.connect(function (err) {
@@ -27,7 +28,7 @@ app.listen(3000, () => {
 
 app.post('/makeuser', (req, res) => {
     console.log('got something...');
-    connection.query('select * from books', function (err, rows, fields) {
+    connection.query('SELECT * FROM books AS solution', function (err, rows, fields) {
         if (err) throw err;
 
         console.log('The solution is: ', rows[0].solution);
