@@ -28,10 +28,10 @@ app.listen(3000, () => {
 
 app.post('/makeuser', (req, res) => {
     console.log('got something...');
-    connection.query('SELECT * FROM books AS solution', function (err, rows, fields) {
+    connection.query('SELECT * FROM books', function (err, rows, fields) {
         if (err) throw err;
 
-        console.log('The solution is: ', rows[0].solution);
+        console.log('The solution is: ', rows[0]);
     });
     console.log(req.body);
     res.send({
