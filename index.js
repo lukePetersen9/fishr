@@ -4,7 +4,6 @@ const app = express();
 
 
 app.use(express.bodyParser());
-app.use(app.router);
 
 
 app.listen(3000, () => {
