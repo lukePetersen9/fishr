@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get('/makeuser', (req, res) => {
+    console.log('got something...');
     console.log(req.headers);
 });
 
