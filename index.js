@@ -6,7 +6,6 @@ var connection = mysql.createConnection({
     host: 'fishr-database.cgdpyeanjdf4.us-east-2.rds.amazonaws.com',
     user: 'admin',
     password: 'zmZMGOOIqHV7t4cP0VBV',
-    database: 'fishr-database',
 });
 
 connection.connect(function (err) {
