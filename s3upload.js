@@ -1,7 +1,7 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
 
-AWS.config.loadFromPath('./config.json');
+AWS.config.loadFromPath('./.git/info/exclude/config.json');
 
 const s3 = new AWS.S3();
 
