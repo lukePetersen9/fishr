@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mysql = require('mysql');
+const s3 = require('./s3upload.js');
 
 
 var connection = mysql.createConnection({
@@ -41,5 +42,6 @@ app.post('/makeuser', (req, res) => {
 
 app.post('/makepost', (req, res) => {
     console.log('makePost');
+    s3.uploadFile(req.body.image1);
     res.send('Good');
 });

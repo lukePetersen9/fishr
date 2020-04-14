@@ -46,3 +46,5 @@ const uploadFile = (fileName) => {
         console.log(`File uploaded successfully. ${data.data}`);
     });
 };
+
+exports.uploadFile = uploadFile;
