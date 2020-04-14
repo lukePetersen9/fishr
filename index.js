@@ -44,13 +44,13 @@ app.post('/makeuser', (req, res) => {
 
 app.post('/makePost', (req, res) => {
     console.log('makePost: ' + req.body.title);
-    s3.uploadFile(req.body.image1, req.body.userID);
-    s3.uploadFile(req.body.image2, req.body.userID);
-    s3.uploadFile(req.body.image3, req.body.userID);
-    s3.uploadFile(req.body.image4, req.body.userID);
-    s3.uploadFile(req.body.video1, req.body.userID);
-    s3.uploadFile(req.body.video2, req.body.userID);
-    s3.uploadFile(req.body.video3, req.body.userID);
-    s3.uploadFile(req.body.video4, req.body.userID);
+    // s3.uploadFile(req.body.image1, req.body.userID);
+    // s3.uploadFile(req.body.image2, req.body.userID);
+    // s3.uploadFile(req.body.image3, req.body.userID);
+    // s3.uploadFile(req.body.image4, req.body.userID);
+    // s3.uploadFile(req.body.video1, req.body.userID);
+    // s3.uploadFile(req.body.video2, req.body.userID);
+    // s3.uploadFile(req.body.video3, req.body.userID);
+    // s3.uploadFile(req.body.video4, req.body.userID);
     res.send('Good');
 });
