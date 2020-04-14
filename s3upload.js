@@ -26,7 +26,7 @@ const createBucket = (bucketName) => {
 };
 
 const uploadFile = (fileName, userID) => {
-
+    console.log(userID);
     const BUCKET_NAME = 'fishr-data/posts';
 
     // Setting up S3 upload parameters
@@ -39,7 +39,7 @@ const uploadFile = (fileName, userID) => {
     // Uploading files to the bucket
     s3.upload(params, function (err, data) {
         if (err) {
-            throw err;
+            console.log(err);
         } else {
             console.log(`File uploaded successfully. ${data.Location}`);
         }
