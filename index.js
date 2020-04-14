@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mysql = require('mysql');
-const aws = require('aws-sdk');
+const AWS = require('aws-sdk');
 
 const ID = 'AKIAQD74I2EM2NV6MZK3';
 const pass = '4+j9JJQsuabsVxPH6Bz7TQQUiCkzO5KzfEAp7pcv';
