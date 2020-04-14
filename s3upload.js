@@ -26,15 +26,19 @@ const createBucket = (bucketName) => {
 };
 
 const uploadFile = (fileName) => {
-    // Read content from the file
-    const fileContent = fs.readFileSync(fileName);
+
+   let buff = new Buffer(fileName, 'base64');
+
+   fs.writeFileSync('stack-abuse-logo-out.png', buff);
+
+   console.log('Base64 image data converted to file: stack-abuse-logo-out.png');
     const BUCKET_NAME = 'fishr-data/posts';
 
     // Setting up S3 upload parameters
     const params = {
         Bucket: BUCKET_NAME,
         Key: 'uh-oh', // File name you want to save as in S3
-        Body: fileContent
+        Body: buff
     };
 
     // Uploading files to the bucket
