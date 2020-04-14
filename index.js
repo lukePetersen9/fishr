@@ -24,6 +24,10 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json());
 
+app.use(express.bodyParser({
+    limit: '50mb'
+}));
+
 app.listen(3000, () => {
     console.log('Listening on port 3000');
 });
