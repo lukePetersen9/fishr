@@ -28,11 +28,12 @@ const createBucket = (bucketName) => {
 const uploadFile = (fileName) => {
     // Read content from the file
     const fileContent = fs.readFileSync(fileName);
+    const BUCKET_NAME = 'fishr-data/posts';
 
     // Setting up S3 upload parameters
     const params = {
         Bucket: BUCKET_NAME,
-        Key: 'cat.jpg', // File name you want to save as in S3
+        Key: 'uh-oh', // File name you want to save as in S3
         Body: fileContent
     };
 
@@ -42,5 +43,6 @@ const uploadFile = (fileName) => {
             throw err;
         }
         console.log(`File uploaded successfully. ${data.Location}`);
+        console.log(`File uploaded successfully. ${data.data}`);
     });
 };

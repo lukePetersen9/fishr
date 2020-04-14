@@ -40,6 +40,6 @@ app.post('/makeuser', (req, res) => {
 });
 
 app.post('/makepost', (req, res) => {
-    console.log('makePost: ' + req.body.image1);
+    console.log('makePost');
     res.send('Good');
 });
