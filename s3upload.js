@@ -25,16 +25,14 @@ const createBucket = (bucketName) => {
     });
 };
 
-const uploadFile = (fileName) => {
-
-   let buff = new Buffer(fileName, 'base64');
+const uploadFile = (fileName, userID) => {
 
     const BUCKET_NAME = 'fishr-data/posts';
 
     // Setting up S3 upload parameters
     const params = {
         Bucket: BUCKET_NAME,
-        Key: 'uh-oh', // File name you want to save as in S3
+        Key: userID + Date.now().toString(), // File name you want to save as in S3
         Body: fileName
     };
 
@@ -42,9 +40,9 @@ const uploadFile = (fileName) => {
     s3.upload(params, function (err, data) {
         if (err) {
             throw err;
+        } else {
+            console.log(`File uploaded successfully. ${data.Location}`);
         }
-        console.log(`File uploaded successfully. ${data.Location}`);
-        console.log(`File uploaded successfully. ${data.data}`);
     });
 };
 
