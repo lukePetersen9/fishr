@@ -1,13 +1,10 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
-
-const ID = 'AKIAQD74I2EM2NV6MZK3';
-const pass = '4+j9JJQsuabsVxPH6Bz7TQQUiCkzO5KzfEAp7pcv';
-
+const config = require('./config.json');
 
 const s3 = new AWS.S3({
-    accessKeyId: ID,
-    secretAccessKey: pass
+    accessKeyId: config.accessKeyId,
+    secretAccessKey: config.secretAccessKey
 });
 
 const createBucket = (bucketName) => {

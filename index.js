@@ -3,12 +3,13 @@ const bodyParser = require('body-parser');
 const app = express();
 const mysql = require('mysql');
 const s3 = require('./s3upload.js');
+const config = require('./config.json');
 
 
 var connection = mysql.createConnection({
     host: 'fishr-database.cgdpyeanjdf4.us-east-2.rds.amazonaws.com',
-    user: 'admin',
-    password: 'zmZMGOOIqHV7t4cP0VBV',
+    user: config.databaseUser,
+    password: config.databasePassword,
     database: 'fishrDB',
 });
 
