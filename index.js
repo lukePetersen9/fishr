@@ -20,7 +20,7 @@ connection.connect(function (err) {
 
 // parse application/json
 app.use(bodyParser.json({
-    limit: '10mb'
+    limit: '100mb'
 }));
 
 
