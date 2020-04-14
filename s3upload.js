@@ -1,11 +1,9 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
-const config = require('./config.json');
 
-const s3 = new AWS.S3({
-    accessKeyId: config.accessKeyId,
-    secretAccessKey: config.secretAccessKey
-});
+AWS.config.loadFromPath('./config.json');
+
+const s3 = new AWS.S3();
 
 const createBucket = (bucketName) => {
     const params = {
