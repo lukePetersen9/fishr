@@ -2,29 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const mysql = require('mysql');
-const AWS = require('aws-sdk');
 
-const ID = 'AKIAQD74I2EM2NV6MZK3';
-const pass = '4+j9JJQsuabsVxPH6Bz7TQQUiCkzO5KzfEAp7pcv';
-const bucketName = 'fishr-data-test';
-
-const s3 = new AWS.S3({
-    accessKeyId: ID,
-    secretAccessKey: pass
-});
-
-const params = {
-    Bucket: bucketName,
-    CreateBucketConfiguration: {
-        // Set your region here
-        LocationConstraint: "us-east-2"
-    }
-};
-
-s3.createBucket(params, function (err, data) {
-    if (err) console.log(err, err.stack);
-    else console.log('Bucket Created Successfully', data.Location);
-});
 
 var connection = mysql.createConnection({
     host: 'fishr-database.cgdpyeanjdf4.us-east-2.rds.amazonaws.com',
@@ -62,4 +40,9 @@ app.post('/makeuser', (req, res) => {
         }
     });
 
+});
+
+app.post('/makepost', (req, res) => {
+    console.log('makePost: ' + req.body.image1);
+    res.send('Good');
 });
