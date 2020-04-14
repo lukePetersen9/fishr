@@ -43,7 +43,7 @@ app.post('/makeuser', (req, res) => {
 });
 
 app.post('/makePost', (req, res) => {
-    console.log('makePost: ' + req.body.title);
+    console.log('makePost: ' + req.body);
     // s3.uploadFile(req.body.image1, req.body.userID);
     // s3.uploadFile(req.body.image2, req.body.userID);
     // s3.uploadFile(req.body.image3, req.body.userID);
