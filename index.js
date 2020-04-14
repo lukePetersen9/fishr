@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 const mysql = require('mysql');
 const s3 = require('./s3upload.js');
-const config = require('./.git/info/exclude/config.json');
+const config = require('./.git/info/exclude');
 
 
 var connection = mysql.createConnection({
