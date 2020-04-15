@@ -41,7 +41,7 @@ function uploadFile(fileName, userID) {
         return 'fd';
     }));
     console.log('b: ' + b);
-    return out;
+    return b;
 }
 
 exports.uploadFile = uploadFile;
