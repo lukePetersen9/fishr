@@ -1,6 +1,5 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
-
 AWS.config.loadFromPath('../config.json');
 
 const s3 = new AWS.S3();
@@ -30,8 +29,6 @@ const uploadFile = (fileName, userID) => {
         Key: userID + Date.now().toString(), // File name you want to save as in S3
         Body: fileName
     };
-
-    // Uploading files to the bucket
     s3.upload(params, function (err, data) {
         if (err) {
             console.log(err);
