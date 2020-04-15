@@ -118,11 +118,11 @@ app.post('/makePost', (req, res) => {
         if (err) {
             console.log('Unable to make post: ' + req.body.userID + ', ' + err.code);
             res.send(err.code);
+            return;
         } else {
             console.log('Made post: ' + req.body.title);
-            res.send('Good');
+
         }
     });
-    res.send('good');
-
+    res.send('Good');
 });
