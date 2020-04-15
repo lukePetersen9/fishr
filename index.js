@@ -52,6 +52,7 @@ app.post('/makePost', (req, res) => {
         console.log('finished image 1');
     } catch (err) {
         res.send(err);
+        return;
     }
     try {
         console.log('started image 2');
@@ -59,6 +60,7 @@ app.post('/makePost', (req, res) => {
         console.log('finished image 2');
     } catch (err) {
         res.send(err);
+        return;
     }
     try {
         console.log('started image 3');
@@ -66,6 +68,7 @@ app.post('/makePost', (req, res) => {
         console.log('finished image 3');
     } catch (err) {
         res.send(err);
+        return;
     }
     try {
         console.log('started image 4');
@@ -73,6 +76,7 @@ app.post('/makePost', (req, res) => {
         console.log('finished image 4');
     } catch (err) {
         res.send(err);
+        return;
     }
     try {
         console.log('started video 1');
@@ -80,6 +84,7 @@ app.post('/makePost', (req, res) => {
         console.log('finished video 1');
     } catch (err) {
         res.send(err);
+        return;
     }
     try {
         console.log('started video 3');
@@ -87,6 +92,7 @@ app.post('/makePost', (req, res) => {
         console.log('finished video 2');
     } catch (err) {
         res.send(err);
+        return;
     }
     try {
         console.log('started video 3');
@@ -94,6 +100,7 @@ app.post('/makePost', (req, res) => {
         console.log('finished video 3');
     } catch (err) {
         res.send(err);
+        return;
     }
     try {
         console.log('started video 4');
@@ -101,11 +108,21 @@ app.post('/makePost', (req, res) => {
         console.log('finished video 4');
     } catch (err) {
         res.send(err);
+        return;
     }
 
     console.log(req.body.title);
     console.log(req.body.description);
-    console.log(image1);
+
+    connection.query('INSERT INTO users (userkey, title, description, image1, image2, image3, image4, video1, video2, video3, video4, time) VALUES ("' + req.body.userID + '","' + req.body.title + '","' + req.body.description + '","' + image1 + '","' + image2 + '","' + image3 + '","' + image4 + '","' + video1 + '","' + video2 + '","' + video3 + '","' + video4 + '","' + Date.now().toString() + '")', function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to make post: ' + req.body.userID + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log('Made post: ' + req.body.title);
+            res.send('Good');
+        }
+    });
     res.send('good');
 
 });
