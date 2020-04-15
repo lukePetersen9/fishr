@@ -30,7 +30,7 @@ function uploadFile(fileName, userID) {
         Key: userID + Date.now().toString(), // File name you want to save as in S3
         Body: fileName
     };
-    s3.upload(params, (b = function (err, data) {
+    b = s3.upload(params, function (err, data) {
         if (err) {
             out = err.toString;
         } else {
@@ -39,7 +39,7 @@ function uploadFile(fileName, userID) {
             console.log("Location: " + data.Location);
         }
         return 'fd';
-    }));
+    });
     console.log('b: ' + b);
     return b;
 }
