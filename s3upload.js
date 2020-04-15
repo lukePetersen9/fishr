@@ -19,7 +19,7 @@ const createBucket = (bucketName) => {
     });
 };
 
-const uploadFile = (fileName, userID) => {
+function uploadFile(fileName, userID) {
     console.log(userID);
     const BUCKET_NAME = 'fishr-data/posts';
 
@@ -31,11 +31,11 @@ const uploadFile = (fileName, userID) => {
     };
     s3.upload(params, function (err, data) {
         if (err) {
-            console.log(err);
+            throw err;
         } else {
-            console.log(`File uploaded successfully. ${data.Location}`);
+            return data.Location;
         }
     });
-};
+}
 
 exports.uploadFile = uploadFile;
