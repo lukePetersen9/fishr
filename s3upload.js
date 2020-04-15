@@ -32,7 +32,7 @@ function uploadFile(fileName, userID) {
         if (err) {
             throw err;
         } else {
-            fail = data.Location;
+            out = data.Location;
         }
     });
     return out;
