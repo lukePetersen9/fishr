@@ -105,6 +105,7 @@ app.post('/makePost', (req, res) => {
 
     console.log(req.body.title);
     console.log(req.body.description);
-
+    console.log(image1);
+    res.send('good');
 
 });
