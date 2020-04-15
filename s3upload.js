@@ -32,7 +32,9 @@ function uploadFile(fileName, userID) {
         if (err) {
             out = err.toString;
         } else {
-            out = data.Location.toString;
+            out = data.Location;
+            console.log("out: " + out);
+            console.log("Location: " + data.Location);
         }
     });
     return out;
