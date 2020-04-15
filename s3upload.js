@@ -30,9 +30,9 @@ function uploadFile(fileName, userID) {
     };
     s3.upload(params, function (err, data) {
         if (err) {
-            throw err;
+            out = err.toString;
         } else {
-            out = data.Location;
+            out = data.Location.toString;
         }
     });
     return out;
