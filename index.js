@@ -44,7 +44,7 @@ app.post('/makeuser', (req, res) => {
 });
 
 app.post('/makePost', s3.upload.array('picture', 8), function (req, res, next) {
-    console.log(req.fields.fileName);
+    console.log(req.files[0].location);
     res.send('Successfully uploaded ' + ' files!');
 });
 
