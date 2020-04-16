@@ -34,6 +34,7 @@ var upload = multer({
             });
         },
         key: function (req, file, cb) {
+            console.log(file.originalname);
             cb(null, Date.now().toString() + '.JPG');
         }
     })
