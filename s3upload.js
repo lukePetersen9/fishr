@@ -26,7 +26,6 @@ var upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: 'fishr-data/posts',
-        contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         metadata: function (req, file, cb) {
             cb(null, {
@@ -36,7 +35,7 @@ var upload = multer({
         key: function (req, file, cb) {
             console.log(file);
             cb(null, `${file.originalname}${Date.now().toString()}.jpg`);
-            
+
         }
     })
 });
