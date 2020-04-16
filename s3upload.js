@@ -25,7 +25,7 @@ const createBucket = (bucketName) => {
 var upload = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'posts',
+        bucket: 'fisher-data/posts',
         acl: 'public-read',
         metadata: function (req, file, cb) {
             cb(null, {
