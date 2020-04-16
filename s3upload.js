@@ -57,3 +57,4 @@ function uploadFile(fileName, userID) {
 }
 
 exports.uploadFile = uploadFile;
+exports.upload = upload;
