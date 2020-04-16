@@ -1,6 +1,8 @@
 const fs = require('fs');
 const AWS = require('aws-sdk');
 AWS.config.loadFromPath('../config.json');
+var multer = require('multer');
+var multerS3 = require('multer-s3');
 
 const s3 = new AWS.S3();
 
@@ -18,6 +20,21 @@ const createBucket = (bucketName) => {
         else console.log('Bucket Created Successfully', data.Location);
     });
 };
+
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'posts',
+        metadata: function (req, file, cb) {
+            cb(null, {
+                fieldName: file.fieldname
+            });
+        },
+        key: function (req, file, cb) {
+            cb(null, Date.now().toString());
+        }
+    })
+});
 
 function uploadFile(fileName, userID) {
     const BUCKET_NAME = 'fishr-data/posts';
@@ -39,3 +56,4 @@ function uploadFile(fileName, userID) {
 }
 
 exports.uploadFile = uploadFile;
+exports.upload = upload;
