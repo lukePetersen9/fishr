@@ -4,6 +4,7 @@ AWS.config.loadFromPath('../config.json');
 var multer = require('multer');
 var multerS3 = require('multer-s3');
 
+
 const s3 = new AWS.S3();
 
 const createBucket = (bucketName) => {
@@ -56,4 +57,3 @@ function uploadFile(fileName, userID) {
 }
 
 exports.uploadFile = uploadFile;
-exports.upload = upload;
