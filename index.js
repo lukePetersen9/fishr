@@ -56,21 +56,17 @@ app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, 
         columnData += value.location + '","';
         i++;
     });
-    console.log(columnData);
-    console.log(columnNames);
-    console.log(req.body.title);
-    console.log(req.body.description);
-    // connection.query('INSERT INTO posts (userkey, title, description, image1, image2, image3, image4, video1, video2, video3, video4, time) VALUES ("' + req.body.userID + '","' + req.body.title + '","' + req.body.description + '","' + image1 + '","' + image2 + '","' + image3 + '","' + image4 + '","' + video1 + '","' + video2 + '","' + video3 + '","' + video4 + '","' + Date.now().toString() + '")', function (err, rows, fields) {
-    //     if (err) {
+    connection.query(`INSERT INTO posts (userkey, title, description, ${columnNames} time) VALUES ("${req.body.userID}","${req.body.title}"," ${req.body.description} "," ${columnData}","${Date.now().toString() }")`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to make post: ' + req.body.userID + ', ' + err.code);
+            res.send(err.code);
+            return;
+        } else {
+            console.log('Made post: ' + req.body.title);
+            res.send('Good');
+            return;
+        }
+    });
 
-    //         console.log('Unable to make post: ' + req.body.userID + ', ' + err.code);
-    //         res.send(err.code);
-    //         return;
-    //     } else {
-    //         console.log('Made post: ' + req.body.title);
-    //         res.send('Good');
-    //         return;
-    //     }
-    // });
     res.send('good');
 });
