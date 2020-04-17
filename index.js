@@ -44,13 +44,19 @@ app.post('/makeuser', (req, res) => {
 });
 
 app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, next) {
-    req.files.forEach((value, index) => {
-        console.log(index.toString + ": " + value.location);
+    var i = 0;
+    var columnNames = "";
+    var columnData = "";
+    req.files.forEach((value) => {
+        if (i < 4) {
+            columnNames += `images${i+1}`;
+        } else {
+            columnNames += `video${i-3}`;
+        }
+        columnData += value.location + '","';
     });
-    for (var i in req.files.length) {
-        console.log(req.files[0].location);
-    }
-
+    console.log(columnData);
+    console.log(columnNames);
     console.log(req.body.title);
     console.log(req.body.description);
     // connection.query('INSERT INTO posts (userkey, title, description, image1, image2, image3, image4, video1, video2, video3, video4, time) VALUES ("' + req.body.userID + '","' + req.body.title + '","' + req.body.description + '","' + image1 + '","' + image2 + '","' + image3 + '","' + image4 + '","' + video1 + '","' + video2 + '","' + video3 + '","' + video4 + '","' + Date.now().toString() + '")', function (err, rows, fields) {
