@@ -48,7 +48,7 @@ app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, 
     var columnNames = "";
     var columnData = "";
     req.files.forEach((value) => {
-        if (i < 4) {
+        if (i % 2 == 0) {
             columnNames += `images${i+1}, `;
         } else {
             columnNames += `video${i-3}`;
