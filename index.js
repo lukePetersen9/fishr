@@ -44,7 +44,9 @@ app.post('/makeuser', (req, res) => {
 });
 
 app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, next) {
-    console.log(req.files.length);
+    req.files.forEach((value, index) => {
+        console.log(value);
+    });
     for (var i in req.files.length) {
         console.log(req.files[0].location);
     }
