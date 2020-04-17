@@ -31,7 +31,7 @@ app.listen(3000, () => {
 
 app.post('/makeuser', (req, res) => {
     console.log('Making user: ' + req.body.userID);
-    connection.query('INSERT INTO users (first_name, last_name, username, email, userkey,phone_number,profile_picture, created, last_login) VALUES ("' + req.body.first + '","' + req.body.last + '","' + req.body.username + '","' + req.body.email + '","' + req.body.userID + '","' + req.body.phone + '","' + req.body.profilePicture + '","' + Date.now().toString() + '","' + Date.now().toString() + '")', function (err, rows, fields) {
+    connection.query('INSERT INTO users (first_name, last_name, username, email, userkey, phone_number,profile_picture, created, last_login) VALUES ("' + req.body.first + '","' + req.body.last + '","' + req.body.username + '","' + req.body.email + '","' + req.body.userID + '","' + req.body.phone + '","' + req.body.profilePicture + '","' + Date.now().toString() + '","' + Date.now().toString() + '")', function (err, rows, fields) {
         if (err) {
             console.log('Unable to make user: ' + req.body.userID + ', ' + err.code);
             res.send(err.code);
@@ -56,7 +56,7 @@ app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, 
         columnData += value.location + '","';
         i++;
     });
-    connection.query(`INSERT INTO posts (userkey, title, description, ${columnNames} time) VALUES ("${req.body.userID}","${req.body.title}"," ${req.body.description} "," ${columnData}${Date.now().toString() }")`, function (err, rows, fields) {
+    connection.query(`INSERT INTO posts (userkey, title, description, ${columnNames} time) VALUES ("${req.body.userID}","${req.body.title}"," ${req.body.description} "," ${columnData}${Date.now().toString()}")`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to make post: ' + req.body.userID + ', ' + err.code);
             res.send(err.code);
@@ -67,6 +67,4 @@ app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, 
             return;
         }
     });
-
-    res.send('good');
 });
