@@ -28,7 +28,6 @@ var upload = multer({
         bucket: 'fishr-data/posts',
         acl: 'public-read',
         key: function (req, file, cb) {
-            console.log(file);
             cb(null, `${Date.now().toString()}${file.originalname}`);
         }
     })

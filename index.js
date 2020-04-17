@@ -44,10 +44,11 @@ app.post('/makeuser', (req, res) => {
 });
 
 app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, next) {
-    for(var i in req.files.length){
-         console.log(req.files[i].location);
+    console.log(req.files.length);
+    for (var i in req.files.length) {
+        console.log(req.files[i].location);
     }
-   
+
     console.log(req.body.title);
     console.log(req.body.description);
     // connection.query('INSERT INTO posts (userkey, title, description, image1, image2, image3, image4, video1, video2, video3, video4, time) VALUES ("' + req.body.userID + '","' + req.body.title + '","' + req.body.description + '","' + image1 + '","' + image2 + '","' + image3 + '","' + image4 + '","' + video1 + '","' + video2 + '","' + video3 + '","' + video4 + '","' + Date.now().toString() + '")', function (err, rows, fields) {
