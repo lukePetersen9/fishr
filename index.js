@@ -42,7 +42,7 @@ app.get('/search/:text', (req, res) => {
     });
 });
 
-app.get('/search/all', (req, res) => {
+app.get('/searchEmpty', (req, res) => {
     console.log(`Searching on : ${req.params.text}`);
     connection.query(`SELECT * FROM users`, function (err, rows, fields) {
         if (err) {
