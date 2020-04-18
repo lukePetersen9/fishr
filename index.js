@@ -30,6 +30,7 @@ app.listen(3000, () => {
 });
 
 app.get('/search/:text', (req, res) => {
+    console.log('got Something');
     console.log(req.params);
     res.send(req.params);
 });
