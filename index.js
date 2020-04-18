@@ -42,6 +42,19 @@ app.get('/search/:text', (req, res) => {
     });
 });
 
+app.get('/search/all', (req, res) => {
+    console.log(`Searching on : ${req.params.text}`);
+    connection.query(`SELECT * FROM users`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to search all:' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Searched all successful`);
+            res.send(rows);
+        }
+    });
+});
+
 app.post('/makeuser', (req, res) => {
     console.log('Making user: ' + req.body.userID);
     connection.query('INSERT INTO users (first_name, last_name, username, email, userkey, phone_number,profile_picture, created, last_login) VALUES ("' + req.body.first + '","' + req.body.last + '","' + req.body.username + '","' + req.body.email + '","' + req.body.userID + '","' + req.body.phone + '","' + req.body.profilePicture + '","' + Date.now().toString() + '","' + Date.now().toString() + '")', function (err, rows, fields) {
