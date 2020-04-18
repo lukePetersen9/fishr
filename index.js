@@ -43,7 +43,7 @@ app.get('/search/:text', (req, res) => {
 });
 
 app.get('/searchEmpty', (req, res) => {
-    console.log(`Searching on : ${req.params.text}`);
+    console.log(`Searching on empty`);
     connection.query(`SELECT * FROM users`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to search all:' + err.code);
