@@ -30,8 +30,8 @@ app.listen(3000, () => {
 });
 
 app.get('/search/:text', (req, res) => {
-    console.log(req.params.text);
-    res.send('good');
+    console.log(req.params);
+    res.send(req.params);
 });
 
 app.post('/makeuser', (req, res) => {
