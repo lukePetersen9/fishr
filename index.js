@@ -29,6 +29,11 @@ app.listen(3000, () => {
     console.log('Listening on port 3000');
 });
 
+app.get('/search/:text', (req, res) => {
+    console.log(req.params.text);
+    res.send('good');
+});
+
 app.post('/makeuser', (req, res) => {
     console.log('Making user: ' + req.body.userID);
     connection.query('INSERT INTO users (first_name, last_name, username, email, userkey, phone_number,profile_picture, created, last_login) VALUES ("' + req.body.first + '","' + req.body.last + '","' + req.body.username + '","' + req.body.email + '","' + req.body.userID + '","' + req.body.phone + '","' + req.body.profilePicture + '","' + Date.now().toString() + '","' + Date.now().toString() + '")', function (err, rows, fields) {
