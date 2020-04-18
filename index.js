@@ -29,8 +29,21 @@ app.listen(3000, () => {
     console.log('Listening on port 3000');
 });
 
+app.get('/user/:key', (req, res) => {
+    console.log(`Fetching user data for: ${req.params.key}`);
+    connection.query(`SELECT * FROM users WHERE userkey = '${req.params.key}' limit 1`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to fetch user data for: ' + req.params.key + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Fetched data on ${req.params.key} successful`);
+            res.send(rows);
+        }
+    });
+});
+
 app.get('/search/:text', (req, res) => {
-    console.log(`Searching on : ${req.params.text}`);
+    console.log(`Searching on: ${req.params.text}`);
     connection.query(`SELECT * FROM users WHERE locate('${req.params.text}',first_name)>0 or locate('${req.params.text}',last_name) or locate('${req.params.text}',username) limit 30`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to search by: ' + req.params.text + ', ' + err.code);
