@@ -31,7 +31,7 @@ app.listen(3000, () => {
 
 app.get('/search/:text', (req, res) => {
     console.log(`Searching on : ${req.params.text}`);
-    connection.query(`SELECT * FROM users WHERE locate(${req.params.text},first_name)>0 or locate(${req.params.text},last_name) or locate(${req.params.text},username) limit 30`, function (err, rows, fields) {
+    connection.query(`SELECT * FROM users WHERE locate('${req.params.text}',first_name)>0 or locate('${req.params.text}',last_name) or locate('${req.params.text}',username) limit 30`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to search by: ' + req.params.text + ', ' + err.code);
             res.send(err.code);
