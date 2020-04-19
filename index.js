@@ -37,6 +37,7 @@ app.get('/user/:key', (req, res) => {
             res.send(err.code);
         } else {
             console.log(`Fetched data on ${req.params.key} successful`);
+            console.log(rows);
             res.send(rows);
         }
     });
@@ -63,7 +64,7 @@ app.get('/privatePosts/:uid', (req, res) => {
             res.send(err.code);
         } else {
             console.log(`Found posts from people that ${req.params.uid} follows`);
-            console.log(rows);
+
             res.send(rows);
         }
     });
