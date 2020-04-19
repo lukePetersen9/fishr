@@ -55,6 +55,32 @@ app.get('/search/:text', (req, res) => {
     });
 });
 
+app.get('/privatePosts/:uid', (req, res) => {
+    console.log(`Retrieving private posts for: ${req.params.uid}`);
+    connection.query(`Select * from following_posts where following_posts.follower = '${req.params.uid}'`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to find posts that you follow by: ' + req.params.uid + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Found posts from people that ${req.params.uid} follows`);
+            res.send(rows);
+        }
+    });
+});
+
+app.get('/fullUserData/:uid', (req, res) => {
+    console.log(`Retrieving full user data for: ${req.params.uid}`);
+    connection.query(`Select * from users where userkey = '${req.params.uid}' limit 1`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to find posts that you follow by: ' + req.params.uid + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Found data for: ${req.params.uid}`);
+            res.send(rows);
+        }
+    });
+});
+
 app.get('/searchEmpty', (req, res) => {
     console.log(`Searching on empty`);
     connection.query(`SELECT * FROM users`, function (err, rows, fields) {
@@ -68,7 +94,7 @@ app.get('/searchEmpty', (req, res) => {
     });
 });
 
-app.post('/makeuser', (req, res) => {
+app.post('/makeUser', (req, res) => {
     console.log('Making user: ' + req.body.userID);
     connection.query('INSERT INTO users (first_name, last_name, username, email, userkey, phone_number,profile_picture, created, last_login) VALUES ("' + req.body.first + '","' + req.body.last + '","' + req.body.username + '","' + req.body.email + '","' + req.body.userID + '","' + req.body.phone + '","' + req.body.profilePicture + '","' + Date.now().toString() + '","' + Date.now().toString() + '")', function (err, rows, fields) {
         if (err) {
