@@ -37,8 +37,8 @@ app.get('/user/:key', (req, res) => {
             res.send(err.code);
         } else {
             console.log(`Fetched data on ${req.params.key} successful`);
-            console.log(rows);
-            res.send(rows);
+            console.log(rows[0]);
+            res.send(rows[0]);
         }
     });
 });
