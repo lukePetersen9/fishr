@@ -70,15 +70,29 @@ app.get('/privatePosts/:uid', (req, res) => {
 
 app.get('/fullUserData/:uid', (req, res) => {
     console.log(`Retrieving full user data for: ${req.params.uid}`);
+    var userData = null;
+    var privatePosts = null;
+    connection.query(`SELECT * FROM users WHERE userkey = '${req.params.key}' limit 1`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to fetch user data for: ' + req.params.key + ', ' + err.code);
+            res.send(err.code);
+            return;
+        } else {
+            console.log(`Fetched data on ${req.params.key} successful`);
+            userData = rows;
+        }
+    });
+    console.log(userData);
     connection.query(`Select * from users where userkey = '${req.params.uid}' limit 1`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to find posts that you follow by: ' + req.params.uid + ', ' + err.code);
             res.send(err.code);
         } else {
             console.log(`Found data for: ${req.params.uid}`);
-            res.send(rows);
+            privatePosts = rows;
         }
     });
+    console.log(privatePosts);
 });
 
 app.get('/searchEmpty', (req, res) => {
