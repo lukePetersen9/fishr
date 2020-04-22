@@ -10,7 +10,6 @@ var connection = mysql.createConnection({
     host: 'fishr-database.cgdpyeanjdf4.us-east-2.rds.amazonaws.com',
     user: config.databaseUser,
     password: config.databasePassword,
-    port: '3306',
     database: 'fishrDB',
 });
 
