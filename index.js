@@ -70,21 +70,6 @@ app.get('/privatePosts/:uid', (req, res) => {
     });
 });
 
-app.get('/fullUserData/:uid', (req, res) => {
-    console.log(`Retrieving full user data for: ${req.params.uid}`);
-    console.log(userData);
-    connection.query(`Select * from users where userkey = '${req.params.uid}' limit 1`, function (err, rows, fields) {
-        if (err) {
-            console.log('Unable to find posts that you follow by: ' + req.params.uid + ', ' + err.code);
-            res.send(err.code);
-        } else {
-            console.log(`Found data for: ${req.params.uid}`);
-            privatePosts = rows;
-        }
-    });
-    console.log(privatePosts);
-});
-
 app.get('/searchEmpty', (req, res) => {
     console.log(`Searching on empty`);
     connection.query(`SELECT * FROM users`, function (err, rows, fields) {
@@ -136,4 +121,20 @@ app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, 
             return;
         }
     });
+});
+
+app.post('/follow/:users', (req, res) => {
+    var follower = req.params.users.substring(0, req.params.users.indexOf(' '));
+    var followed = req.params.users.substring(req.params.users.indexOf(' ') + 1);
+    console.log(`Trying to matchmake: ${follower} --> ${followed}`);
+    connection.query(`INSERT INTO follow (follower, following, time) VALUES ( ${follower}, ${followed}, ${Date.now().toString()})`, function (err, rows, fields) {
+        if (err) {
+            console.log(`Unable to follow: ${follower} --> ${followed} err.code`);
+            res.send(err.code);
+        } else {
+            console.log(`Followed: ${follower} --> ${followed}`);
+            res.send('Good');
+        }
+    });
+
 });
