@@ -99,16 +99,16 @@ app.get('/searchEmpty', (req, res) => {
 });
 
 app.post('/makeUser', (req, res) => {
-    console.log('Making user: ' + req.body.userID);
-    connection.query('INSERT INTO users (first_name, last_name, username, email, userkey, phone_number,profile_picture, created, last_login) VALUES ("' + req.body.first + '","' + req.body.last + '","' + req.body.username + '","' + req.body.email + '","' + req.body.userID + '","' + req.body.phone + '","' + req.body.profilePicture + '","' + Date.now().toString() + '","' + Date.now().toString() + '")', function (err, rows, fields) {
-        if (err) {
-            console.log('Unable to make user: ' + req.body.userID + ', ' + err.code);
-            res.send(err.code);
-        } else {
-            console.log('Made user: ' + req.body.userID);
-            res.send('Good');
-        }
-    });
+    console.log('Making user: ' );
+    // connection.query('INSERT INTO users (first_name, last_name, username, email, userkey, phone_number,profile_picture, created, last_login) VALUES ("' + req.body.first + '","' + req.body.last + '","' + req.body.username + '","' + req.body.email + '","' + req.body.userID + '","' + req.body.phone + '","' + req.body.profilePicture + '","' + Date.now().toString() + '","' + Date.now().toString() + '")', function (err, rows, fields) {
+    //     if (err) {
+    //         console.log('Unable to make user: ' + req.body.userID + ', ' + err.code);
+    //         res.send(err.code);
+    //     } else {
+    //         console.log('Made user: ' + req.body.userID);
+    //         res.send('Good');
+    //     }
+    // });
 
 });
 
