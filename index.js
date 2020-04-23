@@ -127,7 +127,7 @@ app.post('/follow/:users', (req, res) => {
     var follower = req.params.users.substring(0, req.params.users.indexOf(' '));
     var followed = req.params.users.substring(req.params.users.indexOf(' ') + 1);
     console.log(`Trying to matchmake: ${follower} --> ${followed}`);
-    connection.query(`INSERT INTO follow (follower, following, time) VALUES ( ${follower}, ${followed}, ${Date.now().toString()})`, function (err, rows, fields) {
+    connection.query(`INSERT INTO follow (follower, following, time) VALUES ( "${follower}", "${followed}", "${Date.now().toString()}")`, function (err, rows, fields) {
         if (err) {
             console.log(`Unable to follow: ${follower} --> ${followed} ${err.code}`);
             res.send(err.code);
