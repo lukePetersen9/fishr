@@ -129,7 +129,7 @@ app.post('/follow/:users', (req, res) => {
     console.log(`Trying to matchmake: ${follower} --> ${followed}`);
     connection.query(`INSERT INTO follow (follower, following, time) VALUES ( ${follower}, ${followed}, ${Date.now().toString()})`, function (err, rows, fields) {
         if (err) {
-            console.log(`Unable to follow: ${follower} --> ${followed} err.code`);
+            console.log(`Unable to follow: ${follower} --> ${followed} ${err.code}`);
             res.send(err.code);
         } else {
             console.log(`Followed: ${follower} --> ${followed}`);
