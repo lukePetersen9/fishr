@@ -45,7 +45,7 @@ app.get('/user/:key', (req, res) => {
 
 app.get('/search/:text', (req, res) => {
     console.log(`Searching on: ${req.params.text}`);
-    if (text == '') {
+    if (req.params.text == '') {
         connection.query(`SELECT * FROM users`, function (err, rows, fields) {
             if (err) {
                 console.log('Unable to search all:' + err.code);
