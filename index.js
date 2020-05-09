@@ -45,15 +45,27 @@ app.get('/user/:key', (req, res) => {
 
 app.get('/search/:text', (req, res) => {
     console.log(`Searching on: ${req.params.text}`);
-    connection.query(`SELECT * FROM users WHERE locate('${req.params.text}',first_name)>0 or locate('${req.params.text}',last_name) or locate('${req.params.text}',username) limit 30`, function (err, rows, fields) {
-        if (err) {
-            console.log('Unable to search by: ' + req.params.text + ', ' + err.code);
-            res.send(err.code);
-        } else {
-            console.log(`Search on ${req.params.text} successful`);
-            res.send(rows);
-        }
-    });
+    if (text == '') {
+        connection.query(`SELECT * FROM users`, function (err, rows, fields) {
+            if (err) {
+                console.log('Unable to search all:' + err.code);
+                res.send(err.code);
+            } else {
+                console.log(`Searched all successful`);
+                res.send(rows);
+            }
+        });
+    } else {
+        connection.query(`SELECT * FROM users WHERE locate('${req.params.text}',first_name)>0 or locate('${req.params.text}',last_name) or locate('${req.params.text}',username) limit 30`, function (err, rows, fields) {
+            if (err) {
+                console.log('Unable to search by: ' + req.params.text + ', ' + err.code);
+                res.send(err.code);
+            } else {
+                console.log(`Search on ${req.params.text} successful`);
+                res.send(rows);
+            }
+        });
+    }
 });
 
 app.get('/privatePosts/:uid', (req, res) => {
