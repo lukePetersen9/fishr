@@ -151,3 +151,16 @@ app.get('/getFollowing/:user', (req, res) => {
         }
     });
 });
+
+app.get('/getFollowers/:user', (req, res) => {
+    console.log(`Searching on empty`);
+    connection.query(`select followers from follow where following = '${req.params.user}'`, function (err, rows, fields) {
+        if (err) {
+            console.log(`Unable to get who follows ${req.params.user}`);
+            res.send(err.code);
+        } else {
+            console.log(`Got followers list for ${req.params.user}`);
+            res.send(rows);
+        }
+    });
+});
