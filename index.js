@@ -142,7 +142,7 @@ app.post('/follow/:users', (req, res) => {
 app.post('/unfollow/:users', (req, res) => {
     var follower = req.params.users.substring(0, req.params.users.indexOf(' '));
     var followed = req.params.users.substring(req.params.users.indexOf(' ') + 1);
-    console.log(`Trying to matchmake: ${follower} --> ${followed}`);
+    console.log(`Trying to unfollow: ${follower} --> ${followed}`);
     connection.query(`delete from follow where follower = "${follower}" and following = "${followed}"`, function (err, rows, fields) {
         if (err) {
             console.log(`Unable to unfollow: ${follower} --> ${followed} ${err.code}`);
