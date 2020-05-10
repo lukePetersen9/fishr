@@ -154,7 +154,7 @@ app.get('/getFollowing/:user', (req, res) => {
 
 app.get('/getFollowers/:user', (req, res) => {
     console.log(`Searching on empty`);
-    connection.query(`select followers from follow where following = '${req.params.user}'`, function (err, rows, fields) {
+    connection.query(`select follower from follow where following = '${req.params.user}'`, function (err, rows, fields) {
         if (err) {
             console.log(`Unable to get who follows ${req.params.user}`);
             res.send(err.code);
