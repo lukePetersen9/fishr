@@ -45,28 +45,15 @@ app.get('/user/:key', (req, res) => {
 
 app.get('/search/:text', (req, res) => {
     console.log(`Searching on: ${req.params.text}`);
-    console.log(`-${req.params.text}-`);
-    if (req.params.text == '') {
-        connection.query(`SELECT * FROM users`, function (err, rows, fields) {
-            if (err) {
-                console.log('Unable to search all:' + err.code);
-                res.send(err.code);
-            } else {
-                console.log(`Searched all successful`);
-                res.send(rows);
-            }
-        });
-    } else {
-        connection.query(`SELECT * FROM users WHERE locate('${req.params.text}',first_name)>0 or locate('${req.params.text}',last_name) or locate('${req.params.text}',username) limit 30`, function (err, rows, fields) {
-            if (err) {
-                console.log('Unable to search by: ' + req.params.text + ', ' + err.code);
-                res.send(err.code);
-            } else {
-                console.log(`Search on ${req.params.text} successful`);
-                res.send(rows);
-            }
-        });
-    }
+    connection.query(`SELECT * FROM users WHERE locate('${req.params.text}',first_name)>0 or locate('${req.params.text}',last_name) or locate('${req.params.text}',username) limit 30`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to search by: ' + req.params.text + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Search on ${req.params.text} successful`);
+            res.send(rows);
+        }
+    });
 });
 
 app.get('/privatePosts/:uid', (req, res) => {
@@ -150,4 +137,17 @@ app.post('/follow/:users', (req, res) => {
         }
     });
 
+});
+
+app.get('/getFollowing/:user', (req, res) => {
+    console.log(`Searching on empty`);
+    connection.query(`select following from follow where follower = ${req.params.user}`, function (err, rows, fields) {
+        if (err) {
+            console.log(`Unable to get who ${req.params.user} is following`);
+            res.send(err.code);
+        } else {
+            console.log(`Got following list for ${req.params.user}`);
+            res.send(rows);
+        }
+    });
 });
