@@ -71,7 +71,7 @@ app.get('/privatePosts/:uid', (req, res) => {
 });
 
 app.get('/privatePostsAfter/:uid/:time', (req, res) => {
-    console.log(`Retrieving private posts for: ${req.params.uid}`);
+    console.log(`Retrieving private posts for: ${req.params.uid} after ${req.params.time}`);
     connection.query(`Select * from following_posts where following_posts.follower = '${req.params.uid}' and time > ${req.params.time}`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to find posts that you follow by: ' + req.params.uid + ' after: ' + req.params.time + ', ' + err.code);
