@@ -70,6 +70,19 @@ app.get('/privatePosts/:uid', (req, res) => {
     });
 });
 
+app.get('/privatePostsAfter/:uid/:time', (req, res) => {
+    console.log(`Retrieving private posts for: ${req.params.uid}`);
+    connection.query(`Select * from following_posts where following_posts.follower = '${req.params.uid}' and time > ${req.params.time}`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to find posts that you follow by: ' + req.params.uid + ' after: ' + req.params.time + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Refreshed posts from people that ${req.params.uid} follows after ${req.params.time}`);
+            res.send(rows);
+        }
+    });
+});
+
 app.get('/searchEmpty', (req, res) => {
     console.log(`Searching on empty`);
     connection.query(`SELECT * FROM users`, function (err, rows, fields) {
