@@ -95,6 +95,19 @@ app.post('/like/:postID/:uid', (req, res) => {
     });
 });
 
+app.post('/unlike/:postID/:uid', (req, res) => {
+    console.log(`Liking post id ${req.params.postID}: ${req.params.uid}`);
+    connection.query(`DELETE FROM likes WHERE postID = "${req.params.postID}" AND likedBy = "${req.params.uid}"`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to unlike post ' + req.params.postID + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Unliked post ${req.params.postID} by ${req.params.uid}`);
+            res.send('good');
+        }
+    });
+});
+
 app.get('/searchEmpty', (req, res) => {
     console.log(`Searching on empty`);
     connection.query(`SELECT * FROM users`, function (err, rows, fields) {
