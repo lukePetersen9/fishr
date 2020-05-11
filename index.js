@@ -64,7 +64,6 @@ app.get('/privatePosts/:uid', (req, res) => {
             res.send(err.code);
         } else {
             console.log(`Found posts from people that ${req.params.uid} follows`);
-
             res.send(rows);
         }
     });
@@ -79,6 +78,19 @@ app.get('/privatePostsAfter/:uid/:time', (req, res) => {
         } else {
             console.log(`Refreshed posts from people that ${req.params.uid} follows after ${req.params.time}`);
             res.send(rows);
+        }
+    });
+});
+
+app.post('/like/:postID/:uid', (req, res) => {
+    console.log(`Liking post id ${req.params.postID}: ${req.params.uid}`);
+    connection.query(`INSERT INTO likes (likedBy, postID, time) VALUES ("${req.params.uid}","${req.params.postID}","${Date.now().toString()}")`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to like post ' + req.params.postID + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Liked post ${req.params.postID} by ${req.params.uid}`);
+            res.send('good');
         }
     });
 });
