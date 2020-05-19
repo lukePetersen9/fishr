@@ -85,15 +85,16 @@ app.get('/privatePostsAfter/:uid/:time', (req, res) => {
 
 app.post('/like/:postID/:uid', (req, res) => {
     console.log(`Liking post id ${req.params.postID}: ${req.params.uid}`);
-    connection.query(`INSERT INTO likes (likedBy, postID, time) VALUES ("${req.params.uid}","${req.params.postID}","${Date.now().toString()}")`, function (err, rows, fields) {
-        if (err) {
-            console.log('Unable to like post ' + req.params.postID + ', ' + err.code);
-            res.send(err.code);
-        } else {
-            console.log(`Liked post ${req.params.postID} by ${req.params.uid}`);
-            res.send('good');
-        }
-    });
+    // connection.query(`INSERT INTO likes (likedBy, postID, time) VALUES ("${req.params.uid}","${req.params.postID}","${Date.now().toString()}")`, function (err, rows, fields) {
+    //     if (err) {
+    //         console.log('Unable to like post ' + req.params.postID + ', ' + err.code);
+    //         res.send(err.code);
+    //     } else {
+    //         console.log(`Liked post ${req.params.postID} by ${req.params.uid}`);
+    //         res.send('good');
+    //     }
+    // });
+    res.send('gppd');
 });
 
 app.post('/unlike/:postID/:uid', (req, res) => {
