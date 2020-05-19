@@ -112,7 +112,7 @@ app.post('/unlike/:postID/:uid', (req, res) => {
 
 app.get('/getLikeList/:postID', (req, res) => {
     console.log(`Getting like list post id ${req.params.postID}`);
-    connection.query(`SELECT likedBy FROM likes WHERE postID = "${req.params.postID}"`, function (err, rows, fields) {
+    connection.query(`SELECT * FROM users, likes AS l WHERE users.userkey = l.likedBy and l.postID = "${req.params.postID}"`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to get like list ' + req.params.postID + ', ' + err.code);
             res.send(err.code);
