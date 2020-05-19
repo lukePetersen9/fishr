@@ -58,7 +58,7 @@ app.get('/search/:text', (req, res) => {
 
 app.get('/privatePosts/:uid', (req, res) => {
     console.log(`Retrieving private posts for: ${req.params.uid}`);
-    connection.query(`Select * from following_posts where following_posts.follower = '${req.params.uid}'`, function (err, rows, fields) {
+    connection.query(`Select * from following_posts where following_posts.follower = '${req.params.uid}' ORDER BY time ASC`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to find posts that you follow by: ' + req.params.uid + ', ' + err.code);
             res.send(err.code);
@@ -72,7 +72,7 @@ app.get('/privatePosts/:uid', (req, res) => {
 
 app.get('/privatePostsAfter/:uid/:time', (req, res) => {
     console.log(`Retrieving private posts for: ${req.params.uid} after ${req.params.time}`);
-    connection.query(`Select * from following_posts where following_posts.follower = '${req.params.uid}' and time > ${req.params.time}`, function (err, rows, fields) {
+    connection.query(`Select * from following_posts where following_posts.follower = '${req.params.uid}' and time > ${req.params.time} ORDER BY time ASC`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to find posts that you follow by: ' + req.params.uid + ' after: ' + req.params.time + ', ' + err.code);
             res.send(err.code);
