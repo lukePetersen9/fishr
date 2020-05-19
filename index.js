@@ -156,27 +156,27 @@ app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, 
     var columnNames = "";
     var columnData = "";
     console.log('got something');
-    // req.files.forEach((value) => {
-    //     if (i % 2 == 0) {
-    //         columnNames += `image${(i/2)+1}, `;
-    //     } else {
-    //         columnNames += `video${(i/2)+0.5}, `;
-    //     }
-    //     columnData += value.location + '","';
-    //     i++;
-    // });
-    res.send('good');
-    // connection.query(`INSERT INTO posts (userkey, title, description, ${columnNames} time) VALUES ("${req.body.userID}","${req.body.title}"," ${req.body.description} "," ${columnData}${Date.now().toString()}")`, function (err, rows, fields) {
-    //     if (err) {
-    //         console.log('Unable to make post: ' + req.body.userID + ', ' + err.code);
-    //         res.send(err.code);
-    //         return;
-    //     } else {
-    //         console.log('Made post: ' + req.body.title);
-    //         res.send('Good');
-    //         return;
-    //     }
-    // });
+    req.files.forEach((value) => {
+        if (i % 2 == 0) {
+            columnNames += `image${(i/2)+1}, `;
+        } else {
+            columnNames += `video${(i/2)+0.5}, `;
+        }
+        columnData += value.location + '","';
+        i++;
+    });
+  
+    connection.query(`INSERT INTO posts (userkey, title, description, ${columnNames} time) VALUES ("${req.body.userID}","${req.body.title}"," ${req.body.description} "," ${columnData}${Date.now().toString()}")`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to make post: ' + req.body.userID + ', ' + err.code);
+            res.send(err.code);
+            return;
+        } else {
+            console.log('Made post: ' + req.body.title);
+            res.send('Good');
+            return;
+        }
+    });
 });
 
 app.post('/follow/:users', (req, res) => {
