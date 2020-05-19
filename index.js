@@ -110,6 +110,20 @@ app.post('/unlike/:postID/:uid', (req, res) => {
     });
 });
 
+app.get('/getLikeList/:postID', (req, res) => {
+    console.log(`Getting like list post id ${req.params.postID}`);
+    connection.query(`SELECT likedBy FROM likes WHERE postID = "${req.params.postID}")`, function (err, rows, fields) {
+        if (err) {
+            console.log('Unable to get like list ' + req.params.postID + ', ' + err.code);
+            res.send(err.code);
+        } else {
+            console.log(`Got like list for post ${req.params.postID}`);
+            res.send(rows);
+        }
+    });
+
+});
+
 app.get('/searchEmpty', (req, res) => {
     console.log(`Searching on empty`);
     connection.query(`SELECT * FROM users`, function (err, rows, fields) {
