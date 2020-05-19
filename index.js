@@ -156,15 +156,15 @@ app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, 
     var columnNames = "";
     var columnData = "";
     console.log('got something');
-    req.files.forEach((value) => {
-        if (i % 2 == 0) {
-            columnNames += `image${(i/2)+1}, `;
-        } else {
-            columnNames += `video${(i/2)+0.5}, `;
-        }
-        columnData += value.location + '","';
-        i++;
-    });
+    // req.files.forEach((value) => {
+    //     if (i % 2 == 0) {
+    //         columnNames += `image${(i/2)+1}, `;
+    //     } else {
+    //         columnNames += `video${(i/2)+0.5}, `;
+    //     }
+    //     columnData += value.location + '","';
+    //     i++;
+    // });
     res.send('good');
     // connection.query(`INSERT INTO posts (userkey, title, description, ${columnNames} time) VALUES ("${req.body.userID}","${req.body.title}"," ${req.body.description} "," ${columnData}${Date.now().toString()}")`, function (err, rows, fields) {
     //     if (err) {
