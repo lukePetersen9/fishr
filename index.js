@@ -83,8 +83,8 @@ app.get('/privatePostsAfter/:uid/:time', (req, res) => {
     });
 });
 
-app.post('/like/:postID/:uid', (req, res) => {
-    console.log(`Liking post id ${req.params.postID}: ${req.params.uid}`);
+app.post('/like', (req, res) => {
+    console.log(`Liking post id `);
     // connection.query(`INSERT INTO likes (likedBy, postID, time) VALUES ("${req.params.uid}","${req.params.postID}","${Date.now().toString()}")`, function (err, rows, fields) {
     //     if (err) {
     //         console.log('Unable to like post ' + req.params.postID + ', ' + err.code);
