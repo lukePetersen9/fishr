@@ -225,6 +225,7 @@ app.get('/getFollowing/:user', (req, res) => {
 });
 
 app.get('/getFollowers/:user', (req, res) => {
+    
     console.log(`Searching on empty`);
     connection.query(`select * from follower_list where follower = '${req.params.user}'`, function (err, rows, fields) {
         if (err) {
