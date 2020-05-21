@@ -213,7 +213,7 @@ app.post('/unfollow/:users', (req, res) => {
 
 app.get('/getFollowing/:user', (req, res) => {
     console.log(`Searching on empty`);
-    connection.query(`select following from follow where follower = '${req.params.user}'`, function (err, rows, fields) {
+    connection.query(`select * from follower_list where userkey = '${req.params.user}'`, function (err, rows, fields) {
         if (err) {
             console.log(`Unable to get who ${req.params.user} is following`);
             res.send(err.code);
@@ -226,7 +226,7 @@ app.get('/getFollowing/:user', (req, res) => {
 
 app.get('/getFollowers/:user', (req, res) => {
     console.log(`Searching on empty`);
-    connection.query(`select follower from follow where following = '${req.params.user}'`, function (err, rows, fields) {
+    connection.query(`select * from follower_list where userkey = '${req.params.user}'`, function (err, rows, fields) {
         if (err) {
             console.log(`Unable to get who follows ${req.params.user}`);
             res.send(err.code);
