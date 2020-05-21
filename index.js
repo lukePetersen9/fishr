@@ -64,7 +64,7 @@ app.get('/privatePosts/:uid', (req, res) => {
             res.send(err.code);
         } else {
             console.log(`Found posts from people that ${req.params.uid} follows`);
-            console.log(rows);
+
             res.send(rows);
         }
     });
@@ -165,7 +165,7 @@ app.post('/makePost', s3.upload.array('picturesAndVideos'), function (req, res, 
         columnData += value.location + '","';
         i++;
     });
-  
+
     connection.query(`INSERT INTO posts (userkey, title, description, ${columnNames} time) VALUES ("${req.body.userID}","${req.body.title}"," ${req.body.description} "," ${columnData}${Date.now().toString()}")`, function (err, rows, fields) {
         if (err) {
             console.log('Unable to make post: ' + req.body.userID + ', ' + err.code);
